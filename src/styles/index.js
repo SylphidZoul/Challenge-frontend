@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     min-height: 100vh;
     line-height: 1;
+    background: linear-gradient(135deg, rgba(55,202,246,1) 33%, rgba(43,93,250,1) 66%);
   }
 
   ol, ul {

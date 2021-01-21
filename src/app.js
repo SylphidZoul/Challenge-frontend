@@ -1,15 +1,16 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import GlobalStyle from './styles'
+import { MainLayout } from './styles/layout'
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <h1>
-        Hello
-      </h1>
-    </BrowserRouter>
+    <React.StrictMode>
+      <BrowserRouter>
+        <GlobalStyle />
+        <MainLayout />
+      </BrowserRouter>
+    </React.StrictMode>
   )
 }
 

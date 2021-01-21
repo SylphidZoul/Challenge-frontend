@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     modules: ['react', 'react-dom', 'styled-components', 'react-router-dom']
   },
-  mode: 'production',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
