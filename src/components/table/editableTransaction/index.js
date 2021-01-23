@@ -1,12 +1,11 @@
 import React, { useRef } from 'react'
-import { TableRow, TableCell, ButtonsWrapper, MiniButtons } from '../styles'
-import { Input, Select } from './styles'
+import { TableRow, TableCell, ButtonsWrapper, MiniButton, Input, Select } from '../styles'
 import Confirm from '../../../assets/confirm'
 import Cancel from '../../../assets/cancel'
 import PropTypes from 'prop-types'
 
-export const EditableTransaction = ({ transaction, toggleEdit, onSubmit }) => {
-  const formatedDate = new Date(transaction.date).toJSON().slice(0, 10)
+export const EditableTransaction = ({ currentTransaction, toggleEditMode, onEditSubmit }) => {
+  const formatedDate = new Date(currentTransaction.date).toJSON().slice(0, 10)
   const conceptRef = useRef()
   const amountRef = useRef()
   const dateRef = useRef()
@@ -17,48 +16,84 @@ export const EditableTransaction = ({ transaction, toggleEdit, onSubmit }) => {
       concept: conceptRef.current.value,
       amount: amountRef.current.value,
       date: dateRef.current.value,
-      category: categoryRef.current.value
+      ...categoryRef.current && { category: categoryRef.current.value }
     }
-    onSubmit(changes, transaction.id)
-    toggleEdit()
+    onEditSubmit(changes, currentTransaction.id)
+    toggleEditMode()
+  }
+
+  const handleKey = (e) => {
+    e.key === 'Enter' && submitChanges()
+    e.key === 'Escape' && toggleEditMode()
   }
 
   return (
     <TableRow>
       <TableCell label='concept'>
-        <Input ref={conceptRef} type='text' defaultValue={transaction.concept} />
+        <Input
+          ref={conceptRef}
+          type='text'
+          onKeyDown={handleKey}
+          defaultValue={currentTransaction.concept}
+        />
       </TableCell>
 
       <TableCell label='amount'>
-        <Input ref={amountRef} type='number' min={0} max={1000000} step='0.01' defaultValue={parseFloat(transaction.amount)} />
+        <Input
+          ref={amountRef}
+          type='number'
+          onKeyDown={handleKey}
+          min={0}
+          max={1000000}
+          step='0.01'
+          defaultValue={parseFloat(currentTransaction.amount)}
+        />
       </TableCell>
 
       <TableCell label='date'>
-        <Input ref={dateRef} type='date' defaultValue={formatedDate} />
+        <Input
+          ref={dateRef}
+          type='date'
+          onKeyDown={handleKey}
+          defaultValue={formatedDate}
+        />
       </TableCell>
 
       <TableCell label='type'>
-        {transaction.type}
+        {currentTransaction.type}
       </TableCell>
 
-      <TableCell label='category'>
-        <Select ref={categoryRef} defaultValue={transaction.category}>
-          <option value='FOODS'>FOODS</option>
-          <option value='BILLS'>BILLS</option>
-          <option value='TRANSPORTS'>TRANSPORTS</option>
-          <option value='TRANSFERS'>TRANSFERS</option>
-          <option value='OTHERS'>OTHERS</option>
-        </Select>
-      </TableCell>
+      {
+        currentTransaction.type === 'EGRESS'
+          ? (
+            <TableCell label='category'>
+              <Select
+                ref={categoryRef}
+                defaultValue={currentTransaction.category}
+              >
+                <option value='FOODS'>FOODS</option>
+                <option value='BILLS'>BILLS</option>
+                <option value='TRANSPORTS'>TRANSPORTS</option>
+                <option value='TRANSFERS'>TRANSFERS</option>
+                <option value='OTHERS'>OTHERS</option>
+              </Select>
+            </TableCell>
+            )
+          : (
+            <TableCell label='category'>
+              -
+            </TableCell>
+            )
+      }
 
       <TableCell>
         <ButtonsWrapper>
-          <MiniButtons onClick={submitChanges}>
+          <MiniButton onClick={submitChanges}>
             <Confirm />
-          </MiniButtons>
-          <MiniButtons onClick={toggleEdit}>
+          </MiniButton>
+          <MiniButton onClick={toggleEditMode}>
             <Cancel />
-          </MiniButtons>
+          </MiniButton>
         </ButtonsWrapper>
       </TableCell>
     </TableRow>
@@ -66,7 +101,7 @@ export const EditableTransaction = ({ transaction, toggleEdit, onSubmit }) => {
 }
 
 EditableTransaction.propTypes = {
-  transaction: PropTypes.shape({
+  currentTransaction: PropTypes.shape({
     id: PropTypes.number.isRequired,
     concept: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired,
@@ -74,6 +109,6 @@ EditableTransaction.propTypes = {
     type: PropTypes.string.isRequired,
     category: PropTypes.string
   }),
-  toggleEdit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  toggleEditMode: PropTypes.func.isRequired,
+  onEditSubmit: PropTypes.func.isRequired
 }

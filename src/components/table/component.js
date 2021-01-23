@@ -1,68 +1,87 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Transaction } from './transaction'
 import { EditableTransaction } from './editableTransaction'
-import { TableWrapper, Table, TableCaption, TableHead, TableRow, Field } from './styles'
+import { TableWrapper, Table, TableCaption, TableHead, TableRow, Field, MiniButton } from './styles'
 import PropTypes from 'prop-types'
+import { AddNewTransaction } from './newTransaction'
+import AddIcon from '../../assets/add'
 
-export const TransactionsTable = ({
-  fieldsList,
-  transactionsList,
-  caption,
-  editMode,
-  selectedItem,
-  isEditable,
-  onEdit,
-  onDelete,
-  onSubmit
-}) => {
+export const TransactionsTable = forwardRef((
+  {
+    fieldsList, transactionsList, caption, hasCreateModeOn, hasEditModeOn, selectedItem,
+    isEditable, toggleCreateMode, toggleEditMode, onCreateSubmit, onEditSubmit, onDelete
+  },
+  lastTransactionRef
+) => {
   return (
     <TableWrapper>
       <Table>
+
         <TableCaption>
           {caption}
         </TableCaption>
+
         <TableHead>
           <TableRow>
             {
-            fieldsList.map((field, index) => (
-              <Field key={index}>
-                {field}
-              </Field>
-            ))
-          }
+              fieldsList.map((field, index) => (
+                <Field key={index + field}>
+                  {field}
+                </Field>
+              ))
+            }
+
+            {
+              isEditable &&
+                <Field onClick={toggleCreateMode}>
+                  <MiniButton>
+                    <AddIcon />
+                  </MiniButton>
+                </Field>
+            }
           </TableRow>
         </TableHead>
+
         <tbody>
           {
-            transactionsList.map((transaction, index) => {
-              if (editMode && selectedItem === index) {
-                return (
+            hasCreateModeOn && (
+              <AddNewTransaction
+                toggleCreateMode={toggleCreateMode}
+                onCreateSubmit={onCreateSubmit}
+              />
+            )
+          }
+
+          {
+            transactionsList.map((transaction, index) => (
+              (hasEditModeOn && selectedItem === index)
+                ? (
                   <EditableTransaction
                     key={transaction.id}
-                    transaction={transaction}
-                    toggleEdit={onEdit}
-                    onSubmit={onSubmit}
+                    currentTransaction={transaction}
+                    toggleEditMode={toggleEditMode}
+                    onEditSubmit={onEditSubmit}
                   />
-                )
-              }
-              return (
-                <Transaction
-                  key={transaction.id}
-                  index={index}
-                  transaction={transaction}
-                  fieldsList={fieldsList}
-                  isEditable={isEditable}
-                  onEdit={onEdit}
-                  onDelete={onDelete}
-                />
-              )
-            })
+                  )
+                : (
+                  <Transaction
+                    key={transaction.id}
+                    index={index}
+                    transaction={transaction}
+                    fieldsList={fieldsList}
+                    isEditable={isEditable}
+                    toggleEditMode={toggleEditMode}
+                    onDelete={onDelete}
+                    {... transactionsList.length === index + 1 && { ref: lastTransactionRef }}
+                  />
+                  )
+            ))
           }
         </tbody>
       </Table>
     </TableWrapper>
   )
-}
+})
 
 TransactionsTable.propTypes = {
   fieldsList: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -75,10 +94,11 @@ TransactionsTable.propTypes = {
     category: PropTypes.string
   })),
   caption: PropTypes.string.isRequired,
-  editMode: PropTypes.bool.isRequired,
+  hasCreateModeOn: PropTypes.bool.isRequired,
+  hasEditModeOn: PropTypes.bool.isRequired,
   selectedItem: PropTypes.number.isRequired,
+  toggleEditMode: PropTypes.func.isRequired,
   isEditable: PropTypes.bool,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onEditSubmit: PropTypes.func,
+  onDelete: PropTypes.func
 }

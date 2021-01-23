@@ -66,16 +66,18 @@ export const TableRow = styled.tr`
   border-radius: 12px;
   background-color: rgba(${colors.rgbMainWhite}, 0.8);
 
-  & td:last-child {
-    padding: 0;
-    border-bottom: none;
-  }
+  ${props => props.isEditable && css`
+    & td:last-child {
+      padding: 0;
+      border-bottom: none;
+    }
+  `}
 
   @media screen and (min-width: 768px) {
     display: table-row;
     padding: 32px;
     margin-bottom: initial;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
     background-color: transparent;
   }
 `
@@ -95,16 +97,18 @@ export const Field = styled.th`
 
 export const TableCell = styled.td`
   ${cellsStyles}
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
   text-align: right;
   border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
 
   &::before {
     content: '${props => props.label}';
-    float: left;
     font-weight: 500;
     text-transform: uppercase;
+    margin-right: 20%;
     color: ${colors.secBlue};
   }
 
@@ -121,12 +125,42 @@ export const TableCell = styled.td`
 export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding-top: 8px;
+  padding-top: 4px;
 `
 
-export const MiniButtons = styled.button`
+export const MiniButton = styled.button`
   border: none;
   background: transparent;
-  outline: none;
+  outline-color: ${colors.mainSalmon};
   cursor: pointer;
+`
+
+const inputStyles = css`
+  width: 45%;
+  height: 24px;
+  padding: 0px 4px;
+  border: 1px solid ${colors.mainBlue};
+  border-radius: 4px;
+  outline-color: ${colors.mainSalmon};
+  text-align: left;
+  font-size: 14px;
+  background: transparent;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 90%;
+    text-align: center;
+    text-align-last: center;
+  }
+`
+export const Input = styled.input`
+  ${inputStyles}
+`
+export const Select = styled.select`
+  ${inputStyles}
+  height: 28px;
 `

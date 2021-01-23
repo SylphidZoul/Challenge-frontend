@@ -1,9 +1,11 @@
-import React, { useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect, forwardRef } from 'react'
 import { initialState, actions, tableReducer } from '../../reducers/tableReducer'
 import { TransactionsTable } from './component'
-import PropTypes from 'prop-types'
 
-export const TableContainer = ({ transactionsList, caption, onDelete, onSubmit, isEditable }) => {
+export const TableContainer = forwardRef((
+  { transactionsList, caption, onCreateSubmit, onEditSubmit, onDelete, isEditable },
+  lastTransactionRef
+) => {
   const [state, dispatch] = useReducer(tableReducer, initialState)
 
   const generateFieldsToMap = () => {
@@ -17,7 +19,13 @@ export const TableContainer = ({ transactionsList, caption, onDelete, onSubmit, 
     dispatch({ type: actions.SET_FIELDS_LIST, payload })
   }
 
-  const toggleEdit = (index = -1) => {
+  const toggleCreateMode = () => {
+    state.hasCreateModeOn
+      ? dispatch({ type: actions.DISABLE_CREATE_MODE })
+      : dispatch({ type: actions.ENABLE_CREATE_MODE })
+  }
+
+  const toggleEditMode = (index = -1) => {
     if (index === -1) {
       dispatch({ type: actions.DISABLE_EDIT_MODE })
       return
@@ -38,24 +46,12 @@ export const TableContainer = ({ transactionsList, caption, onDelete, onSubmit, 
       transactionsList={transactionsList}
       caption={caption}
       isEditable={isEditable}
-      onEdit={toggleEdit}
+      toggleCreateMode={toggleCreateMode}
+      toggleEditMode={toggleEditMode}
+      onCreateSubmit={onCreateSubmit}
+      onEditSubmit={onEditSubmit}
       onDelete={onDelete}
-      onSubmit={onSubmit}
+      ref={lastTransactionRef}
     />
   )
-}
-
-TableContainer.propTypes = {
-  transactionsList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    concept: PropTypes.string.isRequired,
-    amount: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    category: PropTypes.string
-  })),
-  caption: PropTypes.string.isRequired,
-  isEditable: PropTypes.bool,
-  onDelete: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
-}
+})
