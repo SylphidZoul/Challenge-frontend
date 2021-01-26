@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useRef, useCallback } from 'react'
 import { initialState, actions, transactionsReducer } from '../reducers/transactionsReducer'
+import Http from '../libs/http'
 
 export const useTransactionsData = (params, authorization) => {
   const [state, dispatch] = useReducer(transactionsReducer, initialState)
@@ -43,12 +44,7 @@ export const useTransactionsData = (params, authorization) => {
   const fetchTransactions = async (isMounted) => {
     dispatch({ type: actions.FETCH_DATA })
     try {
-      const res = await window.fetch(`http://localhost:3004/transactions?${query}`,
-        {
-          headers: authorization
-        }
-      )
-      const response = await res.json()
+      const response = await Http.instance.get(`transactions?${query}`, authorization)
       if (isMounted) {
         handleServerResponse(response)
       }
@@ -63,17 +59,7 @@ export const useTransactionsData = (params, authorization) => {
   const createTransaction = async (newTransaction) => {
     dispatch({ type: actions.FETCH_DATA })
     try {
-      const res = await window.fetch('http://localhost:3004/transactions',
-        {
-          method: 'POST',
-          body: JSON.stringify(newTransaction),
-          headers: {
-            ...authorization,
-            'Content-type': 'application/json'
-          }
-        }
-      )
-      const response = await res.json()
+      const response = await Http.instance.post('transactions', newTransaction, authorization)
       handleServerResponse(response)
     } catch (error) {
       dispatch({
@@ -86,17 +72,7 @@ export const useTransactionsData = (params, authorization) => {
   const editTransactionFromServer = async (updates, id) => {
     dispatch({ type: actions.FETCH_DATA })
     try {
-      const res = await window.fetch(`http://localhost:3004/transactions/${id}`,
-        {
-          method: 'PUT',
-          body: JSON.stringify(updates),
-          headers: {
-            ...authorization,
-            'Content-type': 'application/json'
-          }
-        }
-      )
-      const response = await res.json()
+      const response = await Http.instance.put(`transactions/${id}`, updates, authorization)
       handleServerResponse(response)
     } catch (error) {
       dispatch({
@@ -109,13 +85,7 @@ export const useTransactionsData = (params, authorization) => {
   const deleteTransactionFromServer = async (id) => {
     dispatch({ type: actions.FETCH_DATA })
     try {
-      const res = await window.fetch(`http://localhost:3004/transactions/${id}`,
-        {
-          method: 'DELETE',
-          headers: authorization
-        }
-      )
-      const response = await res.json()
+      const response = await Http.instance.delete(`transactions/${id}`, authorization)
       handleServerResponse(response)
     } catch (error) {
       dispatch({
