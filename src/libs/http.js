@@ -30,7 +30,7 @@ class Http {
 
       return parsed
     } catch (error) {
-        throw Error(err)
+      throw Error(err)
     }
   }
 
