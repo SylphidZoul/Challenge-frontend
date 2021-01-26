@@ -9,13 +9,18 @@ export const TableWrapper = styled.div`
     width: 100%;
     max-width: 900px;
     padding: 36px 24px;
-    border-radius: 24px;
+    border-radius: 16px;
     overflow: hidden;
     background-color: rgba(${colors.rgbMainWhite}, 0.8);
   } 
-  @media screen and (min-width: 1024px) {
-    width: 70%;
-  }
+`
+
+export const TableError = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  color: ${colors.secBlue};
+  min-height: 400px;
 `
 
 export const Table = styled.table`
@@ -29,12 +34,21 @@ export const Table = styled.table`
 
 export const TableCaption = styled.caption`
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   text-align: left;
+  line-height: 32px;
   color: ${colors.mainWhite};
+
+  & button{
+    float: right;
+  }
   @media screen and (min-width: 768px) {
-    color: ${colors.secBlue}
+    color: ${colors.secBlue};
+  
+    & button{
+    display: none;
+  }
   }
 `
 
@@ -75,7 +89,6 @@ export const TableRow = styled.tr`
 
   @media screen and (min-width: 768px) {
     display: table-row;
-    padding: 32px;
     margin-bottom: initial;
     border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
     background-color: transparent;
@@ -98,24 +111,27 @@ export const Field = styled.th`
 export const TableCell = styled.td`
   ${cellsStyles}
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => props.label ? 'space-between' : 'center'};
   align-items: center;
   font-size: 14px;
   text-align: right;
   border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
 
-  &::before {
-    content: '${props => props.label}';
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-right: 20%;
-    color: ${colors.secBlue};
-  }
+  ${props => props.label && css`
+    &::before {
+      content: '${props => props.label}';
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-right: 20%;
+      color: ${colors.secBlue};
+    }
+  `}
 
   @media screen and (min-width: 768px) {
     ${cellsStyles}
     border: none;
     display: table-cell;
+    padding: 16px 8px;
     &::before {
       content: none;
     }

@@ -133,13 +133,14 @@ export const useTransactionsData = (params, authorization) => {
     if ('deletedTransaction' in data) return removeDeletedTransaction(data.deletedTransaction)
   }
 
-  const updateTransactionsList = (transactionsList, actualBalance) => {
+  const updateTransactionsList = (transactionsList, responseBalance) => {
     const prevTransactions = [...transactions]
     const updatedTransactions = prevTransactions.concat(transactionsList)
     const hasMore = (transactionsList.length === 12)
     const isFetching = false
+    const newBalance = responseBalance !== null ? responseBalance : actualBalance
 
-    const payload = { transactions: updatedTransactions, hasMore, isFetching, actualBalance }
+    const payload = { transactions: updatedTransactions, hasMore, isFetching, actualBalance: newBalance }
     dispatch({ type: actions.UPDATE_TRANSACTIONS, payload })
   }
 

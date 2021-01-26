@@ -46,9 +46,6 @@ export const AddNewTransaction = ({ toggleCreateMode, onCreateSubmit }) => {
           ref={amountRef}
           type='number'
           onKeyDown={handleKey}
-          min={0}
-          max={1000000}
-          step='0.01'
           placeholder='Amount'
         />
       </TableCell>

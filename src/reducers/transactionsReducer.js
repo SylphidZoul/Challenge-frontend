@@ -1,6 +1,6 @@
 export const initialState = {
   transactions: [],
-  actualBalance: 0,
+  actualBalance: '0',
   isFetching: true,
   error: '',
   hasMore: true,

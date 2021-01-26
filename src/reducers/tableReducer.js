@@ -1,12 +1,10 @@
 export const initialState = {
-  fieldsList: [],
   hasCreateModeOn: false,
   hasEditModeOn: false,
   selectedItem: -1
 }
 
 export const actions = {
-  SET_FIELDS_LIST: 'SET_FIELDS_LIST',
   ENABLE_CREATE_MODE: 'ENABLE_CREATE_MODE',
   DISABLE_CREATE_MODE: 'DISABLE_CREATE_MODE',
   ENABLE_EDIT_MODE: 'ENABLE_EDIT_MODE',

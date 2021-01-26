@@ -4,6 +4,7 @@ import { EditableTransaction } from './editableTransaction'
 import { TableWrapper, Table, TableCaption, TableHead, TableRow, Field, MiniButton } from './styles'
 import PropTypes from 'prop-types'
 import { AddNewTransaction } from './newTransaction'
+import { EmptyTBody } from './emptyTBody'
 import AddIcon from '../../assets/add'
 
 export const TransactionsTable = forwardRef((
@@ -13,12 +14,22 @@ export const TransactionsTable = forwardRef((
   },
   lastTransactionRef
 ) => {
+  const thereAreTransactions = transactionsList.length !== 0
+
   return (
     <TableWrapper>
       <Table>
 
         <TableCaption>
-          {caption}
+          {thereAreTransactions
+            ? (
+              <>
+                {caption}
+                <MiniButton onClick={toggleCreateMode}>
+                  <AddIcon />
+                </MiniButton>
+              </>)
+            : 'It seems there are not any transactions yet!'}
         </TableCaption>
 
         <TableHead>
@@ -30,7 +41,6 @@ export const TransactionsTable = forwardRef((
                 </Field>
               ))
             }
-
             {
               isEditable &&
                 <Field onClick={toggleCreateMode}>
@@ -53,29 +63,37 @@ export const TransactionsTable = forwardRef((
           }
 
           {
-            transactionsList.map((transaction, index) => (
-              (hasEditModeOn && selectedItem === index)
-                ? (
-                  <EditableTransaction
-                    key={transaction.id}
-                    currentTransaction={transaction}
-                    toggleEditMode={toggleEditMode}
-                    onEditSubmit={onEditSubmit}
-                  />
-                  )
-                : (
-                  <Transaction
-                    key={transaction.id}
-                    index={index}
-                    transaction={transaction}
-                    fieldsList={fieldsList}
-                    isEditable={isEditable}
-                    toggleEditMode={toggleEditMode}
-                    onDelete={onDelete}
-                    {... transactionsList.length === index + 1 && { ref: lastTransactionRef }}
-                  />
-                  )
-            ))
+            !thereAreTransactions
+              ? !hasCreateModeOn && (
+                <EmptyTBody
+                  fieldsList={fieldsList}
+                  toggleCreateMode={toggleCreateMode}
+                />
+                )
+
+              : transactionsList.map((transaction, index) => (
+                (hasEditModeOn && selectedItem === index)
+                  ? (
+                    <EditableTransaction
+                      key={transaction.id}
+                      currentTransaction={transaction}
+                      toggleEditMode={toggleEditMode}
+                      onEditSubmit={onEditSubmit}
+                    />
+                    )
+                  : (
+                    <Transaction
+                      key={transaction.id}
+                      index={index}
+                      transaction={transaction}
+                      fieldsList={fieldsList}
+                      isEditable={isEditable}
+                      toggleEditMode={toggleEditMode}
+                      onDelete={onDelete}
+                      {... transactionsList.length === index + 1 && { ref: lastTransactionRef }}
+                    />
+                    )
+              ))
           }
         </tbody>
       </Table>
@@ -86,17 +104,18 @@ export const TransactionsTable = forwardRef((
 TransactionsTable.propTypes = {
   fieldsList: PropTypes.arrayOf(PropTypes.string).isRequired,
   transactionsList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    concept: PropTypes.string.isRequired,
-    amount: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    concept: PropTypes.string,
+    amount: PropTypes.string,
+    date: PropTypes.string,
+    type: PropTypes.string,
     category: PropTypes.string
   })),
   caption: PropTypes.string.isRequired,
   hasCreateModeOn: PropTypes.bool.isRequired,
   hasEditModeOn: PropTypes.bool.isRequired,
   selectedItem: PropTypes.number.isRequired,
+  toggleCreateMode: PropTypes.func.isRequired,
   toggleEditMode: PropTypes.func.isRequired,
   isEditable: PropTypes.bool,
   onEditSubmit: PropTypes.func,
