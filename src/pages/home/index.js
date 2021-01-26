@@ -26,7 +26,6 @@ const Home = () => {
         transactionsList={transactions}
         caption='Last transactions'
         onCreateSubmit={createTransaction}
-        isEditable
       />
       <ErrorToast errorMessage={error} />
       <SpinnerToast isFetching={isFetching} />
