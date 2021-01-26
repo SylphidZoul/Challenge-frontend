@@ -1,10 +1,15 @@
 import React from 'react'
+import { MainLayout, MessageWrapper, ErrorMessage } from './styles'
+import { NotFoundIcon } from '../../assets/404'
 
 const NotFound = () => {
   return (
-    <div>
-      <h1> 404 The requested page doesn't exist.</h1>
-    </div>
+    <MainLayout>
+      <MessageWrapper>
+        <NotFoundIcon />
+        <ErrorMessage>The requested page doesn't exist.</ErrorMessage>
+      </MessageWrapper>
+    </MainLayout>
   )
 }
 
