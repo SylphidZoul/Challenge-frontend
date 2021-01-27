@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import { colors } from '../../styles/colors'
 
 export const MessageWrapper = styled.div`
@@ -20,4 +21,10 @@ export const ErrorMessage = styled.h2`
   font-weight: 500;
   letter-spacing: 1.5px;
   text-align: center;
+  margin-bottom: 20px;
+`
+
+export const Link = styled(RouterLink)`
+  text-decoration: none;
+  color: ${colors.rgbSecBlue};
 `

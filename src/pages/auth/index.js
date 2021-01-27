@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/userContext'
-import { AuthLayout, FormWrapper, FormHeader, LinkP } from './styles'
+import { NotAuthLayout } from '../../styles/mainLayout'
+import { FormWrapper, FormHeader, LinkP } from './styles'
 import { UserForms } from '../../components/userForms'
 import { ErrorToast } from '../../components/errorToast'
 import { LoginIcon } from '../../assets/login'
@@ -18,7 +19,7 @@ const AuthPage = ({ history, location }) => {
   }, [isAuth])
 
   return (
-    <AuthLayout>
+    <NotAuthLayout>
       <FormWrapper>
         <FormHeader>
           {
@@ -64,7 +65,7 @@ const AuthPage = ({ history, location }) => {
         </LinkP>
       </FormWrapper>
       <ErrorToast errorMessage={error} />
-    </AuthLayout>
+    </NotAuthLayout>
   )
 }
 

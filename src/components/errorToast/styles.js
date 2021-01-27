@@ -6,7 +6,7 @@ export const Toast = styled.div`
   left: calc(50% - 150px);
   bottom: 5%;
   width: 300px;
-  padding: 8px 28px 8px 16px;
+  padding: 16px 28px 16px 16px;
   border: 2px double crimson;
   border-radius: 8px;
   display: flex;

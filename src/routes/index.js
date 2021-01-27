@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { PrivateRoute } from './privateRoutes'
 import { SpinnerToast } from '../components/spinnerToast'
 
 const Home = lazy(() => import('../pages/home'))
@@ -15,12 +16,12 @@ export const Routes = () => {
         fallback={<SpinnerToast isFetching />}
       >
         <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/transactions' component={Transactions} />
-          <Route path='/profile' component={Profile} />
+          <PrivateRoute path='/' PrivateComponent={Home} exact />
+          <PrivateRoute path='/transactions' PrivateComponent={Transactions} />
+          <PrivateRoute path='/profile' PrivateComponent={Profile} />
           <Route path='/login' component={Auth} />
           <Route path='/signup' component={Auth} />
-          <Route path='*' component={NotFound} exact />
+          <Route component={NotFound} />
         </Switch>
       </Suspense>
     </>

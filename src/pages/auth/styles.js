@@ -1,19 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles/colors'
 
-export const AuthLayout = styled.main`
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  padding: 56px 20px;
-  display: grid;
-  grid-auto-columns: minmax(270px, 480px);
-  grid-auto-rows: min-content;
-  grid-gap: 30px;
-  justify-content: center;
-  align-content: center;
-`
-
 export const FormWrapper = styled.div`
   width: 100%;
   min-height: 480px;
