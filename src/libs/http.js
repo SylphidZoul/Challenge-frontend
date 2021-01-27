@@ -1,6 +1,6 @@
 class Http {
   static instance = new Http()
-  server = 'https://backend-challenge.vercel.app/'
+  server = 'http://localhost:3004/'
 
   get = async (query, authorization) => {
     try {
@@ -29,7 +29,7 @@ class Http {
       const parsed = await response.json()
 
       return parsed
-    } catch (error) {
+    } catch (err) {
       throw Error(err)
     }
   }
@@ -49,7 +49,7 @@ class Http {
   
       return parsed
       
-    } catch (error) {
+    } catch (err) {
       throw Error(err)
     }
   }
@@ -65,7 +65,7 @@ class Http {
       const parsed = await response.json()
 
       return parsed
-    } catch (error) {
+    } catch (err) {
       throw Error(err)
     }
   }

@@ -4,27 +4,36 @@ import Http from '../libs/http'
 
 export const useTransactionsData = (params, authorization) => {
   const [state, dispatch] = useReducer(transactionsReducer, initialState)
-  const { actualBalance, transactions, isFetching, error, hasMore, page, query } = state
+  const {
+    actualBalance, transactions, pendingFetchedData, isFetching,
+    error, serverHasMoreTransactions, page, query, transactionsNeedReset
+  } = state
   const observer = useRef()
 
   const lastTransactionRef = useCallback(node => {
     if (isFetching) return
-    if (observer.current) observer.current.disconnect()
+    if (observer.current) {
+      observer.current.disconnect()
+    }
+
     observer.current = new window.IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
+      if (entries[0].isIntersecting && serverHasMoreTransactions) {
         addPage()
       }
     })
-    if (node) observer.current.observe(node)
-  }, [isFetching, hasMore])
+
+    if (node) {
+      observer.current.observe(node)
+    }
+  }, [isFetching, serverHasMoreTransactions])
+
+  useEffect(() => {
+    resetRequestState()
+  }, [params])
 
   useEffect(() => {
     updateQuery()
   }, [page])
-
-  useEffect(() => {
-    resetState()
-  }, [params])
 
   useEffect(() => {
     if (error) {
@@ -32,6 +41,12 @@ export const useTransactionsData = (params, authorization) => {
       return () => clearTimeout(timeout)
     }
   }, [error])
+
+  useEffect(() => {
+    if (!transactionsNeedReset && pendingFetchedData) {
+      updateTransactionsList(pendingFetchedData.transactionsList, pendingFetchedData.actualBalance)
+    }
+  }, [transactionsNeedReset])
 
   useEffect(async () => {
     let isMounted = true
@@ -49,10 +64,7 @@ export const useTransactionsData = (params, authorization) => {
         handleServerResponse(response)
       }
     } catch (error) {
-      dispatch({
-        type: actions.SET_ERROR,
-        payload: { error: 'There was a problem with the network.' }
-      })
+      setError()
     }
   }
 
@@ -62,10 +74,7 @@ export const useTransactionsData = (params, authorization) => {
       const response = await Http.instance.post('transactions', newTransaction, authorization)
       handleServerResponse(response)
     } catch (error) {
-      dispatch({
-        type: actions.SET_ERROR,
-        payload: { error: 'There was a problem with the network.' }
-      })
+      setError()
     }
   }
 
@@ -75,10 +84,7 @@ export const useTransactionsData = (params, authorization) => {
       const response = await Http.instance.put(`transactions/${id}`, updates, authorization)
       handleServerResponse(response)
     } catch (error) {
-      dispatch({
-        type: actions.SET_ERROR,
-        payload: { error: 'There was a problem with the network.' }
-      })
+      setError()
     }
   }
 
@@ -88,29 +94,30 @@ export const useTransactionsData = (params, authorization) => {
       const response = await Http.instance.delete(`transactions/${id}`, authorization)
       handleServerResponse(response)
     } catch (error) {
-      dispatch({
-        type: actions.SET_ERROR,
-        payload: { error: 'There was a problem with the network.' }
-      })
+      setError()
     }
   }
 
   const handleServerResponse = ({ error, data }) => {
-    if (error) return dispatch({ type: actions.SET_ERROR, payload: { error: data } })
+    if (error) return setError(data)
+    if (transactionsNeedReset) return resetTransactions(data)
     if ('transactionsList' in data) return updateTransactionsList(data.transactionsList, data.actualBalance)
-    if ('createdTransaction' in data) return resetState()
+    if ('createdTransaction' in data) return resetRequestState()
     if ('updatedTransaction' in data) return updateEditedTransaction(data.updatedTransaction)
     if ('deletedTransaction' in data) return removeDeletedTransaction(data.deletedTransaction)
+  }
+
+  const resetTransactions = (data) => {
+    dispatch({ type: actions.RESET_TRANSACTIONS, payload: { pendingFetchedData: data } })
   }
 
   const updateTransactionsList = (transactionsList, responseBalance) => {
     const prevTransactions = [...transactions]
     const updatedTransactions = prevTransactions.concat(transactionsList)
-    const hasMore = (transactionsList.length === 12)
-    const isFetching = false
+    const serverHasMoreTransactions = (transactionsList.length === 12)
     const newBalance = responseBalance !== null ? responseBalance : actualBalance
 
-    const payload = { transactions: updatedTransactions, hasMore, isFetching, actualBalance: newBalance }
+    const payload = { transactions: updatedTransactions, serverHasMoreTransactions, actualBalance: newBalance }
     dispatch({ type: actions.UPDATE_TRANSACTIONS, payload })
   }
 
@@ -121,8 +128,7 @@ export const useTransactionsData = (params, authorization) => {
     const updatedTransactionsList = [...transactions]
     updatedTransactionsList.splice(updatedTransactionIndex, 1, updatedTransaction)
 
-    const isFetching = false
-    const payload = { transactions: updatedTransactionsList, hasMore, isFetching, actualBalance }
+    const payload = { transactions: updatedTransactionsList, serverHasMoreTransactions, actualBalance }
 
     if (transactions[updatedTransactionIndex].amount !== updatedTransaction.amount) {
       const balance = parseFloat(actualBalance)
@@ -145,8 +151,7 @@ export const useTransactionsData = (params, authorization) => {
     const updatedTransactionsList = transactions
       .filter((transaction) => transaction.id !== parseInt(deletedTransaction))
 
-    const isFetching = false
-    const payload = { transactions: updatedTransactionsList, hasMore, isFetching, actualBalance }
+    const payload = { transactions: updatedTransactionsList, serverHasMoreTransactions, actualBalance }
 
     const balance = parseFloat(actualBalance)
     const deletedAmount = parseFloat(transactions[deletedTransactionIndex].amount)
@@ -166,15 +171,22 @@ export const useTransactionsData = (params, authorization) => {
     dispatch({ type: actions.ADD_PAGE, payload })
   }
 
-  const updateQuery = () => {
-    const updatedQuery = `${params}&page=${page}`
+  const updateQuery = (isReseted = false) => {
+    const updatedQuery = isReseted ? `${params}&page=1` : `${params}&page=${page}`
     const payload = { query: updatedQuery }
     dispatch({ type: actions.UPDATE_QUERY, payload })
   }
 
-  const resetState = () => {
-    dispatch({ type: actions.RESET })
-    updateQuery()
+  const resetRequestState = () => {
+    dispatch({ type: actions.RESET_REQUEST_STATE })
+    updateQuery(true)
+  }
+
+  const setError = (errorMessage = 'There was a problem with the network.') => {
+    dispatch({
+      type: actions.SET_ERROR,
+      payload: { error: errorMessage }
+    })
   }
 
   return {
