@@ -1,5 +1,6 @@
 import React from 'react'
-import { MainLayout, MessageWrapper, ErrorMessage } from './styles'
+import { MainLayout } from '../../styles/mainLayout'
+import { MessageWrapper, ErrorMessage } from './styles'
 import { NotFoundIcon } from '../../assets/404'
 
 const NotFound = () => {

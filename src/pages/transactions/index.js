@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { MainLayout } from './layout'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../../context/userContext'
+import { MainLayout } from '../../styles/mainLayout'
 import { TableContainer } from '../../components/table'
 import { TransactionsFilters } from '../../components/filters'
 import { useTransactionsData } from '../../hooks/useTransactionsData'
 import { SpinnerToast } from '../../components/spinnerToast'
 import { ErrorToast } from '../../components/errorToast'
 
-const Auth = { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0VXNlciIsImVtYWlsIjoidGVzdGVtYWlsQHRlc3QuY29tIiwiaWF0IjoxNjExNDQ3NTgwLCJleHAiOjE2MTE5NjU5ODB9.Hkijv3r4izym9auxs4_sb_uj_1ItosYlj6kqd4h5gsI' }
-
 const TransactionsPage = () => {
   const [query, setQuery] = useState('limit=12')
+  const { token } = useContext(AuthContext)
   const {
     transactions,
     isFetching,
@@ -18,7 +18,7 @@ const TransactionsPage = () => {
     createTransaction,
     editTransaction,
     deleteTransaction
-  } = useTransactionsData(query, Auth)
+  } = useTransactionsData(query, token)
 
   const handleQuery = (newQuery) => {
     setQuery(`limit=12&${newQuery}`)

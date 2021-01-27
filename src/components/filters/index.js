@@ -9,7 +9,12 @@ export const TransactionsFilters = ({ onChange }) => {
   const categoryRef = useRef()
 
   const handleChange = (e) => {
-    e.target.value === 'INGRESS' ? setIsIngress(true) : setIsIngress(false)
+    if (e.target.value === 'INGRESS') {
+      setIsIngress(true)
+      categoryRef.current.value = ''
+    } else {
+      setIsIngress(false)
+    }
     const typeQuery = typeRef.current.value ? `type=${typeRef.current.value}` : ''
     const categoryQuery = categoryRef.current.value ? `category=${categoryRef.current.value}` : ''
 

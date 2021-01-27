@@ -30,9 +30,9 @@ export const H2 = styled.h2`
 `
 
 export const BalanceSpan = styled.span`
-  color: ${props => props.actualBalance >= -1 ? 'olive' : 'crimson'};
+  color: ${props => props.actualBalance >= 0 ? 'olive' : 'crimson'};
   &::before {
-    content: '${props => props.actualBalance >= -1 ? '$' : '-$'}';
+    content: '${props => props.actualBalance >= 0 ? '$' : '-$'}';
     display: inline-block;
   }
 `

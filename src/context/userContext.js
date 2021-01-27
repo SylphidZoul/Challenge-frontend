@@ -14,6 +14,16 @@ export const AuthContextProvider = ({ children }) => {
     getUserFromStorage()
   }, [storagedState])
 
+  useEffect(() => {
+    if (state.error) {
+      const tick = setTimeout(() => {
+        dispatch({ type: actions.CLEAR_ERROR })
+      }, 4000)
+
+      return () => clearTimeout(tick)
+    }
+  }, [state.error])
+
   const authenticate = async (userData, type) => {
     dispatch({ type: actions.FETCH_DATA })
     try {
@@ -33,10 +43,7 @@ export const AuthContextProvider = ({ children }) => {
 
       dispatch({ type: actions.SET_USER, payload })
     } catch (error) {
-      dispatch({
-        type: actions.SET_ERROR,
-        payload: { error: 'There was a problem with the network.' }
-      })
+      setError('There was a problem with the network.')
     }
   }
 
@@ -51,10 +58,15 @@ export const AuthContextProvider = ({ children }) => {
     dispatch({ type: actions.RESET_STATE })
   }
 
+  const setError = (errorMessage) => {
+    dispatch({ type: actions.SET_ERROR, payload: { error: errorMessage } })
+  }
+
   const value = {
     ...state,
     authenticate,
-    signOut
+    signOut,
+    setError
   }
 
   return (

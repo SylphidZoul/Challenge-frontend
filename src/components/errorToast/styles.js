@@ -8,10 +8,10 @@ export const Toast = styled.div`
   width: 300px;
   padding: 8px 28px 8px 16px;
   border: 2px double crimson;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
-  background: rgba(${colors.rgbMainWhite}, 0.9);
+  background: rgba(${colors.rgbMainWhite}, 0.8);
 `
 export const Message = styled.h3`
   font-size: 14px;
