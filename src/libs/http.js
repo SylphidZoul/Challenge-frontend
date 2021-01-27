@@ -1,6 +1,6 @@
 class Http {
   static instance = new Http()
-  server = 'http://localhost:3004/'
+  server = 'https://backend-challenge.vercel.app/'
 
   get = async (query, authorization) => {
     try {

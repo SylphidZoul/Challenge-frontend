@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    modules: ['react', 'react-dom', 'styled-components', 'react-router-dom']
+    modules: ['react', 'react-dom', 'styled-components', 'react-router-dom', 'prop-types']
   },
   mode: 'development',
   output: {

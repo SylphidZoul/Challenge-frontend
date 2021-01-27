@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Label, Input, Button } from './styles'
+import PropTypes from 'prop-types'
 
 export const SignInForm = ({ isFetching, onSubmit, setError }) => {
   const emailRef = useRef()
@@ -44,4 +45,10 @@ export const SignInForm = ({ isFetching, onSubmit, setError }) => {
       </Button>
     </form>
   )
+}
+
+SignInForm.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired
 }
