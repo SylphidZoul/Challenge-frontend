@@ -27,9 +27,9 @@ export const DataDiv = styled.div`
 `
 
 export const DataRow = styled.div`
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
 `
 
 export const Field = styled.h4`
@@ -67,6 +67,6 @@ export const LogOutButton = styled.button`
   }
 
   &:hover {
-  background-color: ${colors.secBlue};
+    background-color: ${colors.secBlue};
   }
 `

@@ -14,8 +14,8 @@ const fadeIn = keyframes`
 const Layout = css`
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  padding: 56px 20px;
+  min-height: calc(100vh);
+  padding: 56px 20px 96px;
   display: grid;
   grid-auto-rows: min-content;
   grid-gap: 30px;
@@ -28,9 +28,10 @@ export const MainLayout = styled.main`
   ${Layout}
   justify-items: center;
   grid-auto-columns: 1fr;
+
   @media screen and (min-width: 1024px) {
     grid-template-columns: minmax(min-content, 900px);
-    padding: 50px 5% 50px calc(5% + 270px);
+    padding: 50px 5% 90px calc(5% + 270px);
   }
 `
 

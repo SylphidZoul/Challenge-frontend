@@ -19,12 +19,12 @@ export const MessageWrapper = styled.div`
 `
 
 export const ErrorMessage = styled.h2`
+  margin-bottom: 20px;
   font-size: 20px;
   color: ${colors.secBlue};
   font-weight: 500;
   letter-spacing: 1.5px;
   text-align: center;
-  margin-bottom: 20px;
 `
 
 export const Link = styled(RouterLink)`

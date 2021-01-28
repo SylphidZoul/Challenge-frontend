@@ -17,26 +17,26 @@ export const MainWrapper = styled.div`
 export const SelectWrapper = styled.div`
   display: inline-block;
   padding: 18px 12px;
+  margin-bottom: 16px;
   border-radius: 12px;
   background: ${colors.rgbMainWhite};
   background: linear-gradient(
     to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
   );
-  margin-bottom: 16px;
   @media screen and (min-width: 768px) {
     width: 35%;
     padding: 24px;
-    border-radius: 16px;
     margin-bottom: 0;
+    border-radius: 16px;
   }
 `
 
 export const Label = styled.label`
   display: block;
+  margin-bottom: 16px;
   font-size: 16px;
   color: ${colors.secBlue};
   font-weight: 500;
-  margin-bottom: 16px;
 `
 
 export const Select = styled.select`

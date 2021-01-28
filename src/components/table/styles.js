@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors } from '../../styles/colors'
 
 export const TableWrapper = styled.div`
@@ -16,14 +16,6 @@ export const TableWrapper = styled.div`
       to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
     );
   } 
-`
-
-export const TableError = styled.h3`
-  font-size: 18px;
-  font-weight: 500;
-  text-align: left;
-  color: ${colors.secBlue};
-  min-height: 400px;
 `
 
 export const Table = styled.table`
@@ -47,6 +39,7 @@ export const TableCaption = styled.caption`
     float: right;
     display: ${props => props.isEditable ? 'block' : 'none'};
   }
+
   @media screen and (min-width: 768px) {
     color: ${colors.secBlue};
   
@@ -76,6 +69,7 @@ export const TableHead = styled.thead`
     overflow: initial;
   }
 `
+
 export const TableRow = styled.tr`
   display: block;
   padding: 6px;
@@ -114,28 +108,28 @@ export const Field = styled.th`
 
 export const TableCell = styled.td`
   ${cellsStyles}
+  border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
   display: flex;
   justify-content: ${props => props.label ? 'space-between' : 'center'};
   align-items: center;
   font-size: 14px;
   text-align: right;
-  border-bottom: 1px solid rgba(${colors.rgbMainBlack}, 0.1);
 
   ${props => props.label && css`
     &::before {
       content: '${props => props.label}';
+      margin-right: 20%;
       font-weight: 500;
       text-transform: uppercase;
-      margin-right: 20%;
       color: ${colors.secBlue};
     }
   `}
 
   @media screen and (min-width: 768px) {
     ${cellsStyles}
-    border: none;
     display: table-cell;
     padding: 16px 8px;
+    border: none;
     &::before {
       content: none;
     }
@@ -152,8 +146,9 @@ export const MiniButton = styled.button`
   border: none;
   background: transparent;
   outline-color: ${colors.mainSalmon};
-  cursor: pointer;
   transition: all 200ms ease-in-out;
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.2)
   }
@@ -169,6 +164,7 @@ const inputStyles = css`
   text-align: left;
   font-size: 14px;
   background: transparent;
+  
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;

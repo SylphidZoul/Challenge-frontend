@@ -35,6 +35,7 @@ export const SignInForm = ({ isFetching, onSubmit, setError }) => {
       </Label>
       <Input
         type='password'
+        autoComplete='current-password'
         ref={passwordRef}
       />
       <Button

@@ -34,11 +34,11 @@ export const SpinnerWrapper = styled.div`
 `
 
 export const Spinner = styled.div`
+  width: 40px;
+  height: 40px;
   margin: 0 auto;
   border: 5px solid rgba(${colors.rgbSecBlue}, 0.7);
   border-top: 5px solid ${colors.mainBlue};
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   animation: ${spin} 0.75s linear infinite;
 `

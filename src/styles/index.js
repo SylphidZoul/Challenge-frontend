@@ -19,8 +19,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: 0;
     font-size: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -37,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    position: relative;
     min-height: 100vh;
     line-height: 1;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png"),

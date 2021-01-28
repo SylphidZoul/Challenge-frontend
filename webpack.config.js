@@ -1,6 +1,5 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -28,9 +27,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, 'dist/index.html')
+      template: path.resolve(__dirname, './public/index.html'),
+      favicon: path.resolve(__dirname, './public/favicon.png'),
+      meta: {
+        description: "Frontend client of the Alkemy's JS Challenge",
+        'theme-color': '#2B5DFA',
+        'og-image': path.resolve(__dirname, './public/cover.jpg')
+      }
     })
   ]
 }

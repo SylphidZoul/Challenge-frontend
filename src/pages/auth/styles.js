@@ -13,16 +13,18 @@ export const FormWrapper = styled.div`
   background: linear-gradient(
     to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
   );
+
   & form {
     margin-bottom: 32px;
   }
 `
 
 export const FormHeader = styled.div`
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 28px;
+
   & svg {
     margin-bottom: 8px;
   }
@@ -39,6 +41,7 @@ export const LinkP = styled.p`
   font-size: 14px;
   color: rgba(${colors.rgbMainBlack}, 0.8);
   align-self: center;
+
   & a {
     margin-left: 8px;
     text-decoration: none;

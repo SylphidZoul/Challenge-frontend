@@ -37,8 +37,14 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, 'public/index.html'),
-      favicon: './public/favicon.png'
+      template: path.resolve(__dirname, 'public/devindex.html'),
+      favicon: path.resolve(__dirname, './public/favicon.png'),
+      title: 'Alkemy JS Challenge',
+      meta: {
+        description: "Frontend client of the Alkemy's JS Challenge",
+        'theme-color': '#2B5DFA',
+        'og-image': path.resolve(__dirname, './public/cover.jpg')
+      }
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,

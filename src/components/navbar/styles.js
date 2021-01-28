@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles/colors'
 import { NavLink as Link } from 'react-router-dom'
 
-export const NavbarWrapper = styled.aside`
+export const NavbarWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;

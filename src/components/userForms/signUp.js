@@ -55,6 +55,7 @@ export const SignUpForm = ({ isFetching, onSubmit, setError }) => {
       </Label>
       <Input
         type='password'
+        autocomplete='new-password'
         ref={passwordRef}
       />
       <Label>
@@ -62,6 +63,7 @@ export const SignUpForm = ({ isFetching, onSubmit, setError }) => {
       </Label>
       <Input
         type='password'
+        autocomplete='new-password'
         ref={password2Ref}
       />
       <Button
