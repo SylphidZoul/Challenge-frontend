@@ -5,11 +5,14 @@ import { colors } from '../../styles/colors'
 export const MessageWrapper = styled.div`
   width: 100%;
   padding: 32px 16px;
-  background-color: rgba(${colors.rgbMainWhite}, 0.8);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: ${colors.rgbMainWhite};
+  background: linear-gradient(
+    to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
+  );
   @media screen and (min-width: 768px) {
     padding: 64px;
   }

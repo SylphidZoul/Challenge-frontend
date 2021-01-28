@@ -6,10 +6,13 @@ export const FormWrapper = styled.div`
   min-height: 480px;
   padding: 24px 12%;
   border-radius: 16px;
-  background-color: rgba(${colors.rgbMainWhite}, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: ${colors.rgbMainWhite};
+  background: linear-gradient(
+    to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
+  );
   & form {
     margin-bottom: 32px;
   }

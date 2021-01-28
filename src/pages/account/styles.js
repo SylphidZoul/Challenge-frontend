@@ -9,7 +9,10 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(${colors.rgbMainWhite}, 0.8);
+  background: ${colors.rgbMainWhite};
+  background: linear-gradient(
+    to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
+  );
 
   @media screen and (min-width: 768px) {
     max-width: 450px;

@@ -18,7 +18,10 @@ export const SelectWrapper = styled.div`
   display: inline-block;
   padding: 18px 12px;
   border-radius: 12px;
-  background-color: rgba(${colors.rgbMainWhite}, 0.8);
+  background: ${colors.rgbMainWhite};
+  background: linear-gradient(
+    to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
+  );
   margin-bottom: 16px;
   @media screen and (min-width: 768px) {
     width: 35%;

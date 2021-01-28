@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { colors } from '../../styles/colors'
 
 export const TableWrapper = styled.div`
@@ -11,7 +11,10 @@ export const TableWrapper = styled.div`
     padding: 36px 24px;
     border-radius: 16px;
     overflow: hidden;
-    background-color: rgba(${colors.rgbMainWhite}, 0.8);
+    background: ${colors.rgbMainWhite};
+    background: linear-gradient(
+      to right bottom, rgba(${colors.rgbMainWhite}, 0.8), rgba(${colors.rgbMainWhite}, 0.6)
+    );
   } 
 `
 
@@ -48,8 +51,8 @@ export const TableCaption = styled.caption`
     color: ${colors.secBlue};
   
     & button{
-    display: none;
-  }
+      display: none;
+    }
   }
 `
 
@@ -150,6 +153,10 @@ export const MiniButton = styled.button`
   background: transparent;
   outline-color: ${colors.mainSalmon};
   cursor: pointer;
+  transition: all 200ms ease-in-out;
+  &:hover {
+    transform: scale(1.2)
+  }
 `
 
 const inputStyles = css`

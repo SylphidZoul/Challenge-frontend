@@ -46,6 +46,8 @@ export const UserData = styled.div`
     margin: 8px 0;
     font-size: 24px;
     font-weight: 600;
+    word-break: break-word;
+    text-align: center;
   }
 
   & p {

@@ -37,7 +37,8 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, 'public/index.html')
+      template: path.resolve(__dirname, 'public/index.html'),
+      favicon: './public/favicon.png'
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,
