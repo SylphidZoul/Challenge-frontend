@@ -27,10 +27,6 @@ export const SpinnerWrapper = styled.div`
   border-radius: 50%;
   background: rgba(${colors.rgbSecWhite}, 0.7);
   animation: ${fallFromAbove} 0.3s ease-out;
-
-  @media screen and (min-width: 1024px) {
-    left: calc(50% + 135px - 20px);
-  }
 `
 
 export const Spinner = styled.div`

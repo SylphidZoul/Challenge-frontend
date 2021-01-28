@@ -29,11 +29,9 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, './public/index.html'),
-      favicon: path.resolve(__dirname, './public/favicon.png'),
       meta: {
         description: "Frontend client of the Alkemy's JS Challenge",
-        'theme-color': '#2B5DFA',
-        'og-image': path.resolve(__dirname, './public/cover.jpg')
+        'theme-color': '#2B5DFA'
       }
     })
   ]
