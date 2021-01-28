@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { colors } from '../styles/colors'
 
-export const ProfilePictureIcon = (props) => {
+export const ProfilePictureIcon = ({ size = 44 }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width={44}
-      height={44}
+      width={size}
+      height={size}
       viewBox='0 0 45.532 45.532'
       fill={colors.secBlue}
     >

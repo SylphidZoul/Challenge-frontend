@@ -5,7 +5,7 @@ import { SpinnerToast } from '../components/spinnerToast'
 
 const Home = lazy(() => import('../pages/home'))
 const Transactions = lazy(() => import('../pages/transactions'))
-const Profile = lazy(() => import('../pages/profile'))
+const Account = lazy(() => import('../pages/account'))
 const Auth = lazy(() => import('../pages/auth'))
 const NotFound = lazy(() => import('../pages/404'))
 
@@ -18,7 +18,7 @@ export const Routes = () => {
         <Switch>
           <PrivateRoute path='/' PrivateComponent={Home} exact />
           <PrivateRoute path='/transactions' PrivateComponent={Transactions} />
-          <PrivateRoute path='/profile' PrivateComponent={Profile} />
+          <PrivateRoute path='/account' PrivateComponent={Account} />
           <Route path='/login' component={Auth} />
           <Route path='/signup' component={Auth} />
           <Route component={NotFound} />

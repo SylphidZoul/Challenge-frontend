@@ -13,7 +13,8 @@ const Layout = css`
 
 export const MainLayout = styled.main`
   ${Layout}
-
+  justify-items: center;
+  grid-auto-columns: 1fr;
   @media screen and (min-width: 1024px) {
   grid-template-columns: minmax(min-content, 900px);
   padding: 50px 5% 50px calc(5% + 270px);

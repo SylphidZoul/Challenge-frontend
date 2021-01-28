@@ -40,6 +40,7 @@ export const UserData = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  color: rgba(${colors.rgbMainBlack}, 0.9);
 
   & h4 {
     margin: 8px 0;

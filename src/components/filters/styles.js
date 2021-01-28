@@ -3,10 +3,12 @@ import { colors } from '../../styles/colors'
 
 export const MainWrapper = styled.div`
   width: 100%;
+  max-width: 370px;
   display: flex;
   flex-direction: column;
 
   @media screen and (min-width: 768px) {
+    max-width: 100%;
     flex-direction: row;
     justify-content: space-between;
   }

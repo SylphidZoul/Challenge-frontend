@@ -42,6 +42,7 @@ export const TableCaption = styled.caption`
 
   & button{
     float: right;
+    display: ${props => props.isEditable ? 'block' : 'none'};
   }
   @media screen and (min-width: 768px) {
     color: ${colors.secBlue};

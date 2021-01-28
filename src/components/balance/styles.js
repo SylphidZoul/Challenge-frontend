@@ -11,6 +11,7 @@ export const BalanceWrapper = styled.div`
     max-width: 400px;
     padding: 24px;
     border-radius: 16px;
+    justify-self: start;
   }
 `
 

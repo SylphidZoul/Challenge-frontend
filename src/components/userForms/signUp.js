@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Label, Input, Button } from './styles'
+import { Label, Input, Button, ButtonText } from './styles'
 import PropTypes from 'prop-types'
 
 export const SignUpForm = ({ isFetching, onSubmit, setError }) => {
@@ -68,7 +68,9 @@ export const SignUpForm = ({ isFetching, onSubmit, setError }) => {
         type='submit'
         disabled={isFetching}
       >
-        {isFetching ? 'Loading...' : 'Submit'}
+        <ButtonText isFetching={isFetching}>
+          {isFetching ? 'Loading' : 'Submit'}
+        </ButtonText>
       </Button>
     </form>
   )

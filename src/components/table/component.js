@@ -20,7 +20,7 @@ export const TransactionsTable = forwardRef((
     <TableWrapper>
       <Table>
 
-        <TableCaption>
+        <TableCaption isEditable={isEditable}>
           {thereAreTransactions
             ? (
               <>

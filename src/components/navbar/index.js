@@ -42,8 +42,8 @@ export const Navbar = () => {
               </NavLink>
             </Li>
             <Li onClick={handleOpen}>
-              <NavLink to='/profile'>
-                Profile
+              <NavLink to='/account'>
+                Account
                 <ProfileIcon />
               </NavLink>
             </Li>
