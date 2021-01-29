@@ -24,7 +24,7 @@ export const H2 = styled.h2`
   align-items: center;
   font-size: 18px;
   font-weight: 500;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
   text-align: left;
   line-height: 28px;
   @media screen and (min-width: 768px) {

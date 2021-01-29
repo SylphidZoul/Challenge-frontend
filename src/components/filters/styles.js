@@ -35,7 +35,7 @@ export const Label = styled.label`
   display: block;
   margin-bottom: 16px;
   font-size: 16px;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
   font-weight: 500;
 `
 
@@ -43,7 +43,7 @@ export const Select = styled.select`
   width: 100%;
   height: 32px;
   padding: 4px 8px;
-  border: 1px solid ${colors.mainBlue};
+  border: 1px solid ${colors.secBlue};
   border-radius: 4px;
   outline-color: ${colors.mainSalmon};
   text-align: left;

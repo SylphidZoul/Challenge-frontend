@@ -7,13 +7,13 @@ export const Label = styled.label`
   font-size: 16px;
   letter-spacing: 1.5px;
   font-weight: 500;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
 `
 
 export const Input = styled.input`
   width: 100%;
   padding: 8px;
-  border: 1px solid ${colors.mainBlue};
+  border: 1px solid ${colors.secBlue};
   border-radius: 4px;
   margin-bottom: 32px;
   outline-color: ${colors.mainSalmon};
@@ -28,12 +28,12 @@ export const Button = styled.button`
   border: none;
   margin-top: 8px;
   border-radius: 4px;
-  background-color: rgba(${colors.rgbSecBlue}, 0.85);
+  background-color: rgba(${colors.rgbMainBlue}, 0.85);
   outline-color: ${colors.mainSalmon};
   cursor: pointer;
 
   &:hover {
-  background-color: ${colors.secBlue};
+  background-color: ${colors.mainBlue};
   }
 `
 

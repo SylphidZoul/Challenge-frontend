@@ -1,8 +1,8 @@
 export const colors = {
-  mainBlue: '#37CAF6',
-  rgbMainBlue: '55, 202, 246',
-  secBlue: '#2B5DFA',
-  rgbSecBlue: '43, 93, 250',
+  secBlue: '#37CAF6',
+  rgbSecBlue: '55, 202, 246',
+  mainBlue: '#2B5DFA',
+  rgbMainBlue: '43, 93, 250',
   mainSalmon: '#FF958F',
   rgbSalmon: '255, 149, 143',
   mainWhite: '#F9F9F9',

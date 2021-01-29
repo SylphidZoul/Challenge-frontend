@@ -41,7 +41,7 @@ export const TableCaption = styled.caption`
   }
 
   @media screen and (min-width: 768px) {
-    color: ${colors.secBlue};
+    color: ${colors.mainBlue};
   
     & button{
       display: none;
@@ -102,7 +102,7 @@ export const Field = styled.th`
   font-size: 13px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
   ${cellsStyles}
 `
 
@@ -121,7 +121,7 @@ export const TableCell = styled.td`
       margin-right: 20%;
       font-weight: 500;
       text-transform: uppercase;
-      color: ${colors.secBlue};
+      color: ${colors.mainBlue};
     }
   `}
 
@@ -158,7 +158,7 @@ const inputStyles = css`
   width: 45%;
   height: 24px;
   padding: 0px 4px;
-  border: 1px solid ${colors.mainBlue};
+  border: 1px solid ${colors.secBlue};
   border-radius: 4px;
   outline-color: ${colors.mainSalmon};
   text-align: left;

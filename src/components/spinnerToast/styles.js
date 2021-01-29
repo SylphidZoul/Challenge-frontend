@@ -33,8 +33,8 @@ export const Spinner = styled.div`
   width: 40px;
   height: 40px;
   margin: 0 auto;
-  border: 5px solid rgba(${colors.rgbSecBlue}, 0.7);
-  border-top: 5px solid ${colors.mainBlue};
+  border: 5px solid rgba(${colors.rgbMainBlue}, 0.7);
+  border-top: 5px solid ${colors.secBlue};
   border-radius: 50%;
   animation: ${spin} 0.75s linear infinite;
 `

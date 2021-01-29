@@ -32,7 +32,7 @@ export const FormHeader = styled.div`
   & h3 {
     font-size: 18px;
     font-weight: 500;
-    color: ${colors.secBlue};
+    color: ${colors.mainBlue};
     letter-spacing: 2px;
   }
 `
@@ -45,6 +45,6 @@ export const LinkP = styled.p`
   & a {
     margin-left: 8px;
     text-decoration: none;
-    color: ${colors.secBlue}
+    color: ${colors.mainBlue}
   }
 `

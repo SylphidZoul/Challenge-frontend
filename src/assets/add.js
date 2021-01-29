@@ -4,7 +4,7 @@ import { colors } from '../styles/colors'
 const Add = (props) => {
   return (
     <svg
-      fill={colors.secBlue}
+      fill={colors.mainBlue}
       height='24pt'
       width='24pt'
       viewBox='0 0 448 448'

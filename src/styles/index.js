@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     line-height: 1;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png"),
-    linear-gradient(135deg, rgba(${colors.rgbMainBlue}, 1) 33%, rgba(${colors.rgbSecBlue}, 1) 66%);
+    linear-gradient(135deg, rgba(${colors.rgbSecBlue}, 1) 33%, rgba(${colors.rgbMainBlue}, 1) 66%);
   }
 
   ol, ul {

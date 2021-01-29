@@ -12,7 +12,7 @@ export const Foot = styled.footer`
 
 export const Text = styled.p`
   font-size: 12px;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
   font-weight: 500;
   text-align: right;
   letter-spacing: 1.5px;

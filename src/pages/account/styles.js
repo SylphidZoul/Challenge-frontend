@@ -36,7 +36,7 @@ export const Field = styled.h4`
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
 `
 
 export const UserValue = styled.p`
@@ -58,7 +58,7 @@ export const LogOutButton = styled.button`
   letter-spacing: 1px;
   font-size: 18px;
   color: ${colors.mainWhite};
-  background-color: rgba(${colors.rgbSecBlue}, 0.85);
+  background-color: rgba(${colors.rgbMainBlue}, 0.85);
   outline-color: ${colors.mainSalmon};
   cursor: pointer;
 
@@ -67,6 +67,6 @@ export const LogOutButton = styled.button`
   }
 
   &:hover {
-    background-color: ${colors.secBlue};
+    background-color: ${colors.mainBlue};
   }
 `

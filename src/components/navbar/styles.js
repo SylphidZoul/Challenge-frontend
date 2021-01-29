@@ -79,7 +79,7 @@ export const NavLink = styled(Link)`
   display: flex;
   justify-content: space-between;
   text-decoration: none;
-  color: ${colors.secBlue};
+  color: ${colors.mainBlue};
   font-size: 16px;
   font-weight: 500;
 `
